@@ -1,6 +1,13 @@
 version: '3.6'
 
+x-redis-def:
+  &redis-def
+  restart: "on-failure"
+  image: redis:alpine
+  ports:
+    - 8545
+
+
 services:
   test-a:
-    build: explore/.
-    image: redis:test
+    << : *redis-def
