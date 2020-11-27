@@ -51,7 +51,8 @@ x-redis-def:
 
 x-elasticsearch-def:
   &elasticsearch-def
-  build: ./elasticsearch
+#  build: ./elasticsearch
+  image: besu_elasticsearch:latest
   environment:
     - bootstrap.memory_lock=true
     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -84,7 +85,8 @@ x-kibana-def:
 
 x-logstash-def:
   &logstash-def
-  build: ./logstash
+#  build: ./logstash
+  image: besu_logstash:latest
   environment:
     - ES_HOST=http://elasticsearch:9200
     - REDIS_HOST=redis
@@ -98,7 +100,8 @@ x-logstash-def:
 
 x-filebeat-def:
   &filebeat-def
-  build: ./filebeat
+#  build: ./filebeat
+  image: besu_filebeat:latest
   environment:
     - ENV_NAME=dev
     - IP_ADDRESS=127.0.0.1
@@ -114,7 +117,8 @@ x-filebeat-def:
 
 x-metricbeat-def:
   &metricbeat-def
-  build: ./metricbeat
+#  build: ./metricbeat
+  image: besu_metricbeat:latest
   environment:
     - ENV_NAME=dev
     - IP_ADDRESS=127.0.0.1
@@ -246,7 +250,7 @@ services:
 
 
   explorer:
-    build: block-explorer-light/.
+#    build: block-explorer-light/.
     image: quorum-dev-quickstart/block-explorer-light:develop
     depends_on:
       - rpcnode
